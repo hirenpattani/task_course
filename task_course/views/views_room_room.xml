@@ -1,0 +1,58 @@
+<odoo>
+    <data>
+
+        <record id="room_room_view_tree" model="ir.ui.view">
+            <field name="name">room.room.view.tree</field>
+            <field name="model">room.room</field>
+            <field name="arch" type="xml">
+                <tree string="Rooms">
+                    <field name="name" />
+                    <field name="location" />
+                    <field name="capacity" />
+                    <field name="max_attendees" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="room_room_view_form" model="ir.ui.view">
+            <field name="name">room.room.view.form</field>
+            <field name="model">room.room</field>
+            <field name="arch" type="xml">
+                <form string="Room">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="capacity" />
+                            </group>
+                            <group>
+                                <field name="location" />
+                                <field name="max_attendees" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="room_room_action" model="ir.actions.act_window">
+            <field name="name">Rooms</field>
+            <field name="res_model">room.room</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="course_configuration_menu"
+            name="Configuration"
+            parent="task_course.course_menu"
+            sequence="2"/>
+
+        <menuitem
+            id="room_room_menu"
+            name="Rooms"
+            parent="task_course.course_configuration_menu"
+            action="task_course.room_room_action"
+            sequence="1"/>
+
+    </data>
+</odoo>

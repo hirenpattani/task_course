@@ -1,0 +1,112 @@
+<odoo>
+    <data>
+
+        <record id="course_course_view_tree" model="ir.ui.view">
+            <field name="name">course.course.view.tree</field>
+            <field name="model">course.course</field>
+            <field name="arch" type="xml">
+                <tree string="Courses">
+                    <field name="name" />
+                    <field name="instructor_id" />
+                    <field name="room_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="course_course_view_form" model="ir.ui.view">
+            <field name="name">course.course.view.form</field>
+            <field name="model">course.course</field>
+            <field name="arch" type="xml">
+                <form string="Course">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="room_id" />
+                            </group>
+                            <group>
+                                <field name="instructor_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="attendees" string="Attendees">
+                                <field name="attendees_ids" nolabel="1" />
+                            </page>
+                            <page name="lessions" string="Lessions">
+                                <field name="lession_ids" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="lession_id" />
+                                        <field name="room_id" readonly="1" />
+                                        <field name="course_id" invisible="1" />
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group>
+                            <field name="description" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="course_course_action" model="ir.actions.act_window">
+            <field name="name">Courese</field>
+            <field name="res_model">course.course</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="course_menu"
+            name="Course"
+            sequence="1"/>
+
+        <menuitem
+            id="course_course_menu"
+            name="Courses"
+            parent="task_course.course_menu"
+            action="task_course.course_course_action"
+            sequence="1"/>
+
+    <record id="course_list_page" model="website.page">
+        <field name="url">/course</field>
+        <field name="is_published">True</field>
+        <field name="view_id" ref="website_course_list"/>
+        <field name="track">True</field>
+    </record>
+
+    <record id="menu_course" model="website.menu">
+        <field name="name">Courses</field>
+        <field name="url">/course</field>
+        <field name="page_id" ref="task_course.course_list_page"/>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">60</field>
+    </record>
+
+
+    <template id="task_course.website_course_list" name="website_course_list">
+        <title>Courses</title>
+        <t t-foreach="course" t-as="courses">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td style="width:25%;" valign="center">
+                            <strong>Course</strong>
+                        </td>
+                        <td style="width:25%;" valign="center">
+                            <t t-esc="course.get('name')"/>
+                        </td>
+                        <td style="width:25%;" valign="center">
+                            <strong>Lessions</strong>
+                        </td>
+                        <td style="width:25%;" valign="center">
+                            <t t-esc="len(course.get('lession_ids'))"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+    </data>
+</odoo>

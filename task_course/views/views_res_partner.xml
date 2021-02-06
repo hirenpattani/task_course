@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+
+        <record id="inherit_res_partner_inherit_res_partner" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="instructor_id" readonly="1" />
+                    <field name="course_ids" widget="many2many_tags" readonly="1" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

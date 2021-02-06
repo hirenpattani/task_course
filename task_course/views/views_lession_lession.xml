@@ -1,0 +1,48 @@
+<odoo>
+    <data>
+
+        <record id="lession_lession_view_tree" model="ir.ui.view">
+            <field name="name">lession.lession.view.tree</field>
+            <field name="model">lession.lession</field>
+            <field name="arch" type="xml">
+                <tree string="Lessions">
+                    <field name="name" />
+                    <field name="room_id" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="lession_lession_view_form" model="ir.ui.view">
+            <field name="name">lession.lession.view.form</field>
+            <field name="model">lession.lession</field>
+            <field name="arch" type="xml">
+                <form string="Lession">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" />
+                            </group>
+                            <group>
+                                <field name="room_id" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lession_lession_action" model="ir.actions.act_window">
+            <field name="name">Lessions</field>
+            <field name="res_model">lession.lession</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            id="lession_lession_menu"
+            name="Lessions"
+            parent="task_course.course_configuration_menu"
+            action="task_course.lession_lession_action"
+            sequence="1"/>
+
+    </data>
+</odoo>

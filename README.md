@@ -1,1 +1,1 @@
-# task_course
+# Odoo Module for Course Management
